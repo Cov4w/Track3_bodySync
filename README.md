@@ -18,8 +18,9 @@
     <h2>
         ✅ 기술 스택
     </h2>
-    <li><a href="#Crawling"> 🛠️크롤링</a></li>
-    
+    <ul>
+        <li><a href="#Crawling"> 🛠️크롤링</a></li>
+    </ul>
 </div>
 
 <div id="crawling">
