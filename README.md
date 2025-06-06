@@ -16,6 +16,7 @@
 ![크롤링02](images/crawling_02.png)
 - 봇 밑에 Disallowed 라고 되어있으면 크롤링이 금지된 봇.
 - Crawl-delay : 숫자 -> 크롤링 간격을 조정 해둔 것.
+- ⭐️ 하지만 이번 크롤링 작업에서는 브라우저에서 AJAX를 요청하는 방식으로 크롤링하기 때문에 위 목록과는 무관하다.
 ## 📌 필요 라이브러리 호출
 ```
 import requests
@@ -116,4 +117,30 @@ X-Requested-With": "XMLHttpRequest",
 ```
 - 위 코드로 이 요청이 js에서 실행된 AJAX 요청임을 알린다.
 ## 🔍 해당 코드의 결과
+### ✅ 순수 가격 추이 데이터 결과
+```
+{'1': {'count': 4, 'result': [{'Fulldate': '25-05-13', 'date': '05-13', 'minPrice': 69220}, {'Fulldate': '25-05-20', 'date': '05-20', 'minPrice': 69220}, {'Fulldate': '25-05-27', 'date': '05-27', 'minPrice': 80000}, {'Fulldate': '25-06-03', 'date': '06-03', 'minPrice': 83900}], 'maxPrice': '83900', 'minPrice': '69220'}, '3': {'count': 12, 'result': [{'Fulldate': '25-03-18', 'date': '03-18', 'minPrice': 76600}, {'Fulldate': '25-03-25', 'date': '03-25', 'minPrice': 76600}, {'Fulldate': '25-04-01', 'date': '04-01', 'minPrice': 76600}, {'Fulldate': '25-04-08', 'date': '04-08', 'minPrice': 76600}, {'Fulldate': '25-04-15', 'date': '04-15', 'minPrice': 76600}, {'Fulldate': '25-04-22', 'date': '04-22', 'minPrice': 76600}, {'Fulldate': '25-04-29', 'date': '04-29', 'minPrice': 76600}, {'Fulldate': '25-05-06', 'date': '05-06', 'minPrice': 76600}, {'Fulldate': '25-05-13', 'date': '05-13', 'minPrice': 69220}, {'Fulldate': '25-05-20', 'date': '05-20', 'minPrice': 69220}, {'Fulldate': '25-05-27', 'date': '05-27', 'minPrice': 80000}, {'Fulldate': '25-06-03', 'date': '06-03', 'minPrice': 83900}], 'maxPrice': '83900', 'minPrice': '69220'}, '6': {'count': 7, 'result': [{'date': '24-12', 'minPrice': 69430}, {'date': '25-01', 'minPrice': 72900}, {'date': '25-02', 'minPrice': 69880}, {'date': '25-03', 'minPrice': 71900}, {'date': '25-04', 'minPrice': 76600}, {'date': '25-05', 'minPrice': 69220}, {'date': '25-06', 'minPrice': 83900}], 'maxPrice': 83900, 'minPrice': 69220}, '12': {'count': 12, 'result': [{'date': '24-07', 'minPrice': 68460}, {'date': '24-08', 'minPrice': 70050}, {'date': '24-09', 'minPrice': 64950}, {'date': '24-10', 'minPrice': 67830}, {'date': '24-11', 'minPrice': 64510}, {'date': '24-12', 'minPrice': 69430}, {'date': '25-01', 'minPrice': 72900}, {'date': '25-02', 'minPrice': 69880}, {'date': '25-03', 'minPrice': 71900}, {'date': '25-04', 'minPrice': 76600}, {'date': '25-05', 'minPrice': 69220}, {'date': '25-06', 'minPrice': 83900}], 'maxPrice': 83900, 'minPrice': 64510}, '24': {'count': 23, 'result': [{'date': '23-08', 'minPrice': 65470}, {'date': '23-09', 'minPrice': 65370}, {'date': '23-10', 'minPrice': 65660}, {'date': '23-11', 'minPrice': 67680}, {'date': '23-12', 'minPrice': 67910}, {'date': '24-01', 'minPrice': 65640}, {'date': '24-02', 'minPrice': 65580}, {'date': '24-03', 'minPrice': 64160}, {'date': '24-04', 'minPrice': 63200}, {'date': '24-05', 'minPrice': 67580}, {'date': '24-06', 'minPrice': 65430}, {'date': '24-07', 'minPrice': 68460}, {'date': '24-08', 'minPrice': 70050}, {'date': '24-09', 'minPrice': 64950}, {'date': '24-10', 'minPrice': 67830}, {'date': '24-11', 'minPrice': 64510}, {'date': '24-12', 'minPrice': 69430}, {'date': '25-01', 'minPrice': 72900}, {'date': '25-02', 'minPrice': 69880}, {'date': '25-03', 'minPrice': 71900}, {'date': '25-04', 'minPrice': 76600}, {'date': '25-05', 'minPrice': 69220}, {'date': '25-06', 'minPrice': 83900}], 'maxPrice': 83900, 'minPrice': 63200}}
+```
+#### 🔍 데이터 구조
+```
+{
+  "1": {...},    // 최근 1주일
+  "3": {...},    // 최근 3주
+  "6": {...},    // 최근 6개월
+  "12": {...},   // 최근 12개월
+  "24": {...}    // 최근 24개월
+}
+```
+### 🛠️ 데이터를 그래프로 변환해 한눈에 식별하기 편하게 바꿈
+```
+    plt.figure(figsize=(10, 5))
+        plt.plot(dates, prices, marker='o', color=color)
+        plt.title(f"{pName} 3개월 단위 가격 추이")
+        plt.xlabel("날짜")
+        plt.ylabel("최저가 (원)")
+        plt.xticks(rotation=45)
+        plt.grid()
+        plt.tight_layout()
+        plt.show()
+```
 ![크롤링03](images/crawling_03.png)
