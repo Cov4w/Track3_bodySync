@@ -19,7 +19,11 @@
         ✅ 기술 스택
     </h2>
     <ul>
-        <li><a href="#Crawling"> 🛠️크롤링</a></li>
+        <li><a href="#Crawling"> 🛠️ 상품 가격 추이 크롤링</a></li>
+        <li><a href="#"> 🛠️ 사용자 데이터 저장</a></li>
+        <li><a href="#">🛠️ openAI API를 통해 운동 루틴 추천</a></li>
+        <li><a href="#">🛠️</a></li>
+        <li><a href="#">🛠️</a></li>
     </ul>
 </div>
 
